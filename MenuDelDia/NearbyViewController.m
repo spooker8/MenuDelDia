@@ -20,10 +20,8 @@
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @property (strong, nonatomic) NSMutableArray* photos;
-
-//@property (nonatomic) float restaurantLatitude;
-//@property (nonatomic) float restaurantLongitude;
 @property (nonatomic) PFGeoPoint *myGeopoint;
+@property (strong, nonatomic) PFUser *user;
 
 
 
@@ -36,7 +34,7 @@
 @property (nonatomic, strong) NSIndexPath* lastSelectedIndex;
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
 
-@property (strong, nonatomic) PFUser *user;
+
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
