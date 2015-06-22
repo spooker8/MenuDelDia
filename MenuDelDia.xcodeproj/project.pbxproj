@@ -38,7 +38,7 @@
 		4428C5A21B2EF70800D938D3 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 4428C5A11B2EF70800D938D3 /* Restaurant.m */; };
 		4428C5A81B2F18F800D938D3 /* NearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4428C5A71B2F18F800D938D3 /* NearbyViewController.m */; };
 		4428C5AB1B2F2A5C00D938D3 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4428C5AA1B2F2A5C00D938D3 /* MeViewController.m */; };
-		4428C5AE1B2F749C00D938D3 /* RestaurantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4428C5AD1B2F749C00D938D3 /* RestaurantViewController.m */; };
+		4428C5AE1B2F749C00D938D3 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4428C5AD1B2F749C00D938D3 /* MapViewController.m */; };
 		44571E781B30508F00FBD2E4 /* NearbyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44571E771B30508F00FBD2E4 /* NearbyTableViewCell.m */; };
 		44571E7B1B305E5000FBD2E4 /* DetailNearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44571E7A1B305E5000FBD2E4 /* DetailNearbyViewController.m */; };
 		44AA3BE31B3157AF00178D20 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA3BE21B3157AF00178D20 /* FavouriteViewController.m */; };
@@ -109,8 +109,8 @@
 		4428C5A71B2F18F800D938D3 /* NearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyViewController.m; sourceTree = "<group>"; };
 		4428C5A91B2F2A5C00D938D3 /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		4428C5AA1B2F2A5C00D938D3 /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
-		4428C5AC1B2F749C00D938D3 /* RestaurantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantViewController.h; sourceTree = "<group>"; };
-		4428C5AD1B2F749C00D938D3 /* RestaurantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantViewController.m; sourceTree = "<group>"; };
+		4428C5AC1B2F749C00D938D3 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		4428C5AD1B2F749C00D938D3 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		44571E761B30508F00FBD2E4 /* NearbyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyTableViewCell.h; sourceTree = "<group>"; };
 		44571E771B30508F00FBD2E4 /* NearbyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyTableViewCell.m; sourceTree = "<group>"; };
 		44571E791B305E5000FBD2E4 /* DetailNearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailNearbyViewController.h; sourceTree = "<group>"; };
@@ -205,13 +205,13 @@
 			name = FavouriteViewController;
 			sourceTree = "<group>";
 		};
-		4403EDA61B36E840001571F1 /* RestaurantViewController */ = {
+		4403EDA61B36E840001571F1 /* MapViewController */ = {
 			isa = PBXGroup;
 			children = (
-				4428C5AC1B2F749C00D938D3 /* RestaurantViewController.h */,
-				4428C5AD1B2F749C00D938D3 /* RestaurantViewController.m */,
+				4428C5AC1B2F749C00D938D3 /* MapViewController.h */,
+				4428C5AD1B2F749C00D938D3 /* MapViewController.m */,
 			);
-			name = RestaurantViewController;
+			name = MapViewController;
 			sourceTree = "<group>";
 		};
 		4403EDA71B36EF01001571F1 /* MeViewController */ = {
@@ -329,7 +329,7 @@
 				4403EDA31B36E804001571F1 /* NearbyViewController */,
 				4403EDA41B36E81D001571F1 /* DetailNearbyViewController */,
 				4403EDA51B36E82D001571F1 /* FavouriteViewController */,
-				4403EDA61B36E840001571F1 /* RestaurantViewController */,
+				4403EDA61B36E840001571F1 /* MapViewController */,
 				4403EDA71B36EF01001571F1 /* MeViewController */,
 				4403EDA81B36EF11001571F1 /* LoginViewController */,
 				4403EDA91B36EF1C001571F1 /* SignupViewController */,
@@ -470,7 +470,7 @@
 				4428C5A81B2F18F800D938D3 /* NearbyViewController.m in Sources */,
 				44571E7B1B305E5000FBD2E4 /* DetailNearbyViewController.m in Sources */,
 				4403ED871B3400F7001571F1 /* SignupViewController.m in Sources */,
-				4428C5AE1B2F749C00D938D3 /* RestaurantViewController.m in Sources */,
+				4428C5AE1B2F749C00D938D3 /* MapViewController.m in Sources */,
 				44AA3BE31B3157AF00178D20 /* FavouriteViewController.m in Sources */,
 				4428C54F1B2EAFC400D938D3 /* main.m in Sources */,
 				4428C5A21B2EF70800D938D3 /* Restaurant.m in Sources */,

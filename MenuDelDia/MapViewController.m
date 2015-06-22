@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 anand. All rights reserved.
 //
 
-#import "RestaurantViewController.h"
+#import "MapViewController.h"
 
-@interface RestaurantViewController ()
+@interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UITabBarControllerDelegate>
 
 @end
 
-@implementation RestaurantViewController
+@implementation MapViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

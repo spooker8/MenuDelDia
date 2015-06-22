@@ -42,14 +42,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self loadFavorites];
-    [self loadMenuDelDia];
-    
-    
-    [self menuPhotos];
-    [self photos];
-    [self.tableView reloadData];
 
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
    
@@ -65,8 +57,7 @@
     [self loadFavorites];
     [self loadMenuDelDia];
 
-    [self menuPhotos];
-    [self photos];
+
     [self.tableView reloadData];
 
     
@@ -97,12 +88,6 @@
         
         self.listOfFavoritedRestaurants = listOfFavoritedRestaurants ;
     
-        //this shows data
-        //    NSLog(@"loadfavorite list  %@",self.listOfFavoritedRestaurants );
-
-       //  }];
-
-    
 }
 
 
@@ -120,10 +105,11 @@
         
         Restaurant *restaurant = [Restaurant objectWithoutDataWithObjectId:objectId];
         [restaurants addObject:restaurant];
-        
-        [query whereKey:@"restaurant" containedIn:restaurants];
-        
     }
+    
+    self.listOfRestaurantsIsFav = @[];
+    
+    [query whereKey:@"restaurant" containedIn:restaurants];
     
         [query findObjectsInBackgroundWithBlock:^(NSArray *listOfRestaurantsisFav, NSError *error) {
             if (!error) {
@@ -133,40 +119,11 @@
                 
                 
                 
-                // The find succeeded.
-              //      NSLog(@"Successfully retrieved %lu scores.", menus.count);
-                
-               
-  
-//                for (int i = 0; i < [self.listOfFavoritedRestaurants count]; i++) {
-//                    
-//                    if (![menus containsObject:self.listOfFavoritedRestaurants]) {
-//                        NSLog(@"yes");
-//                        
-//                        NSMutableArray *listOfData = [[NSMutableArray alloc] initWithArray:[menus containsObject:self.listOfFavoritedRestaurants]];
-//                        
-//                        
-//                        
-//                    }
-//                    else {
-//                        
-//                         NSLog(@"no");
-//                    }
-//                        
-//                    
-//                }
-                
-              //  if([collection containsObject:tempItem])
-                
-                
-                
                 // Do something with the found objects
                 
                 //query the latest date menu and the latest
                 
                 self.listOfRestaurantsIsFav = listOfRestaurantsisFav;
-                [self.tableView reloadData];
-                
                 self.photos = [NSMutableArray array];
                 self.menuPhotos = [NSMutableArray array];
                 
@@ -242,12 +199,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    if ([self.listOfRestaurantsIsFav  count]) {
-        return [self.listOfRestaurantsIsFav count];
-    }
-    
-    
-    return 0;
+
+    return [self.listOfRestaurantsIsFav count];
     
     
     
@@ -342,6 +295,34 @@
 //    return 0;
 //}
 
+
+
+
+//old find all data method.
+// The find succeeded.
+//      NSLog(@"Successfully retrieved %lu scores.", menus.count);
+
+
+
+//                for (int i = 0; i < [self.listOfFavoritedRestaurants count]; i++) {
+//
+//                    if (![menus containsObject:self.listOfFavoritedRestaurants]) {
+//                        NSLog(@"yes");
+//
+//                        NSMutableArray *listOfData = [[NSMutableArray alloc] initWithArray:[menus containsObject:self.listOfFavoritedRestaurants]];
+//
+//
+//
+//                    }
+//                    else {
+//
+//                         NSLog(@"no");
+//                    }
+//
+//
+//                }
+
+//  if([collection containsObject:tempItem])
 
 
 
