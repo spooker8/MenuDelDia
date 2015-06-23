@@ -324,7 +324,7 @@
     NearbyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nearbycell"];
     
  
-    MenuDelDia *menu = self.menus[indexPath.row];
+    MenuDelDia *menu = self.menus[indexPath.row]; //what is happening here?
 
     if (self.photos.count > indexPath.row && self.photos[indexPath.row] != [NSNull null])
     {

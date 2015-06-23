@@ -539,6 +539,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="mapView" destination="yvc-7R-i3m" id="ocg-vA-jsC"/>
+                        <outlet property="viewAllActionButton" destination="m5P-bt-weg" id="hkp-Ta-2No"/>
+                        <outlet property="viewFavActionButton" destination="lxH-Jy-Mj7" id="km4-3U-Bzj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wuL-kl-H8Y" userLabel="First Responder" sceneMemberID="firstResponder"/>

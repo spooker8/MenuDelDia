@@ -15,18 +15,29 @@
 
 @interface MapViewController ()
 
+
+@property (weak, nonatomic) IBOutlet UIButton *viewFavActionButton;
+@property (weak, nonatomic) IBOutlet UIButton *viewAllActionButton;
+
+
+@property(strong,nonatomic)NSArray *listOfFavoritedRestaurants;
+
 @property (nonatomic, strong) CLLocation *selectedLocation;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+
 
 @property (nonatomic) PFGeoPoint *myGeopoint;
 
 @property (strong, nonatomic) NSMutableArray* photos;
 @property (strong, nonatomic) PFUser *user;
-
+@property (nonatomic) int index;
 
 
 //menu del dia
 @property (strong, nonatomic) NSArray *menus;
 @property (strong, nonatomic) NSMutableArray* menuPhotos;
+
+@property (strong, nonatomic) NSArray *listOfRestaurantsIsFav;
 
 
 @end
@@ -37,9 +48,14 @@
     [super viewDidLoad];
     
      [self startCoreLocation];
-     self.mapView.showsUserLocation = YES;
     
-    [self myAnnotation];
+     self.mapView.showsUserLocation = YES;
+     self.locationManager = [[CLLocationManager alloc]init];
+
+    
+      [self loadFavorites];
+    
+//    [self myAnnotation];
 
 
    
@@ -93,123 +109,99 @@
 
 
 //LOCATION MANAGER
-//-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-//    
-//    
-//    CLLocation *location= locations.lastObject;
-//    
-//  //  NSLog(@"didUpdateLocations %@", location);
-//    
-//    
-//}
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    
+    CLLocation *location= locations.lastObject;
+    
+    NSLog(@"didUpdateLocations %@", location);
+    
+    
+}
 
 
 #pragma mark MK Annotations Delegate Methods
 
 
--(void)myAnnotation
-{
-    
-    PFQuery *query2 = [PFQuery queryWithClassName:@"MenuDelDia"];
-    
-    [query2 includeKey:@"restaurant"];
-    
-    //  [query2 whereKey:@"location" nearGeoPoint:self.restaurantGeopoint];
-    
-    [query2 findObjectsInBackgroundWithBlock:^(NSArray *menus, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-               NSLog(@"Successfully retrieved %lu scores.", menus.count);
-            // Do something with the found objects
-            
-            //query the latest date menu and the latest
-            
-            self.menus = menus;
-            //      [self.tableView reloadData];
-            
-            self.photos = [NSMutableArray array];
-            self.menuPhotos = [NSMutableArray array];
-            
-            for (NSInteger i = 0; i < menus.count; i++)
-            {
-                [self.photos addObject:[NSNull null]];
-                [self.menuPhotos addObject:[NSNull null]];
-            }
-            
-            
-            for (NSInteger i = 0; i < menus.count; i++)
-            {
-                MenuDelDia *menu = menus[i];
-                
-                PFFile* file = menu.restaurant[@"imageFile"];
-                [self getPhoto:file atIndex:i];
-                
-                PFFile* file2 = menu[@"imageFile"];
-                [self getMenuPhoto:file2 atIndex:i];
-            }
-            
-            
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-        
-       
-        for (int i = 0; i < [self.menus count]; i++) {
-            
-            PFGeoPoint *tempGeo = self.menus [@"location"];
-            NSLog(@"%@",tempGeo);
-        }
-        
-
-        
-    }];
-
-    
-   
-    
-    
- 
-    
-    
-    
-    
-        
-        
-    //    PFGeoPoint *restaurantGeopoint = menu.restaurant.location;
-        
-        
-    //    MenuDelDia *menu = self.menus[indexPath.row];
-
-    //    PFGeoPoint *restaurantGeopoint = menu.restaurant.location;
-
-
-    
-//        CLLocationCoordinate2D annotationCoordinate = CLLocationCoordinate2DMake(tempGeo.latitude, tempGeo.longitude);
-//        MapAnnotation *annotation = [[MapAnnotation alloc] init];
-//        annotation.coordinate = annotationCoordinate;
-//        //        annotation.title = location[@"Name"];
-//        //        annotation.subtitle = location[@"Place"];
-//        [self.mapView addAnnotation:annotation];
-    
-    
-//    MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
-//    myAnnotation.coordinate = CLLocationCoordinate2DMake(41.412645, 2.166501);
-//    myAnnotation.title = @"Matthews Pizza";
-//    myAnnotation.subtitle = @"Best Pizza in Town";
-//    [self.mapView addAnnotation:myAnnotation];
-    
-}
-
+//-(void)myAnnotation
+//
+//{
+//    
+//   
+//    PFQuery *query2 = [PFQuery queryWithClassName:@"MenuDelDia"];
+//    
+//    [query2 includeKey:@"restaurant"];
+//    
+//    //  [query2 whereKey:@"location" nearGeoPoint:self.restaurantGeopoint];
+//    
+//    [query2 findObjectsInBackgroundWithBlock:^(NSArray *menus, NSError *error) {
+//        if (!error) {
+//            // The find succeeded.
+//               NSLog(@"Successfully retrieved %lu scores.", menus.count);
+//            // Do something with the found objects
+//            
+//            //query the latest date menu and the latest
+//            
+//            self.menus = menus;
+//            //      [self.tableView reloadData];
+//            
+//            self.photos = [NSMutableArray array];
+//            self.menuPhotos = [NSMutableArray array];
+//            
+//            for (NSInteger i = 0; i < menus.count; i++)
+//            {
+//                [self.photos addObject:[NSNull null]];
+//                [self.menuPhotos addObject:[NSNull null]];
+//            }
+//            
+//            
+//            for (NSInteger i = 0; i < menus.count; i++)
+//            {
+//                MenuDelDia *menu = menus[i];
+//                
+//                PFFile* file = menu.restaurant[@"imageFile"];
+//                [self getPhoto:file atIndex:i];
+//                
+//                PFFile* file2 = menu[@"imageFile"];
+//                [self getMenuPhoto:file2 atIndex:i];
+//            }
+//            
+//            
+//        } else {
+//            // Log details of the failure
+//            NSLog(@"Error: %@ %@", error, [error userInfo]);
+//        }
+//   
+//        for (int i=0; i < [self.menus count]; i++) {
+//            
+//            MenuDelDia *allPoints = self.menus[i];
+//            
+//            NSLog(@"%@",allPoints.restaurant.location);
+//        
+//            CLLocationCoordinate2D annotationCoordinate = CLLocationCoordinate2DMake(allPoints.restaurant.location.latitude, allPoints.restaurant.location.longitude);
+//          
+//           MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
+//            myAnnotation.coordinate = annotationCoordinate ;
+//               myAnnotation.title = [NSString stringWithFormat:@"Name: %@",allPoints.restaurant.name];
+//            myAnnotation.subtitle = [NSString stringWithFormat:@"Menu Price:€ %@",allPoints.price];
+//            [self.mapView addAnnotation:myAnnotation];
+//
+//
+//        }
+//    
+//    }];
+//
+//    
+//}
 
 
 
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    id <MKAnnotation> annotation = [view annotation];
-    if ([annotation isKindOfClass:[MKPointAnnotation class]])
+    id <MKAnnotation> myAnnotation = [view annotation];
+    if ([myAnnotation isKindOfClass:[MKPointAnnotation class]])
     {
-        NSLog(@"Clicked Pizza Shop");
+        NSLog(@"Show restaurant");
     }
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Disclosure Pressed" message:@"Click Cancel to Go Back" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     [alertView show];
@@ -277,26 +269,185 @@
 - (IBAction)viewAllRestaurants:(id)sender {
     
     
+    PFQuery *query2 = [PFQuery queryWithClassName:@"MenuDelDia"];
+    
+    [query2 includeKey:@"restaurant"];
+    
+    //  [query2 whereKey:@"location" nearGeoPoint:self.restaurantGeopoint];
+    
+    [query2 findObjectsInBackgroundWithBlock:^(NSArray *menus, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %lu scores.", menus.count);
+            // Do something with the found objects
+            
+            //query the latest date menu and the latest
+            
+            self.menus = menus;
+            //      [self.tableView reloadData];
+            
+            self.photos = [NSMutableArray array];
+            self.menuPhotos = [NSMutableArray array];
+            
+            for (NSInteger i = 0; i < menus.count; i++)
+            {
+                [self.photos addObject:[NSNull null]];
+                [self.menuPhotos addObject:[NSNull null]];
+            }
+            
+            
+            for (NSInteger i = 0; i < menus.count; i++)
+            {
+                MenuDelDia *menu = menus[i];
+                
+                PFFile* file = menu.restaurant[@"imageFile"];
+                [self getPhoto:file atIndex:i];
+                
+                PFFile* file2 = menu[@"imageFile"];
+                [self getMenuPhoto:file2 atIndex:i];
+            }
+            
+            
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+        
+        for (int i=0; i < [self.menus count]; i++) {
+            
+            MenuDelDia *allPoints = self.menus[i];
+            
+            NSLog(@"%@",allPoints.restaurant.location);
+            
+            CLLocationCoordinate2D annotationCoordinate = CLLocationCoordinate2DMake(allPoints.restaurant.location.latitude, allPoints.restaurant.location.longitude);
+            
+            MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
+            myAnnotation.coordinate = annotationCoordinate ;
+            myAnnotation.title = [NSString stringWithFormat:@"Name: %@",allPoints.restaurant.name];
+            myAnnotation.subtitle = [NSString stringWithFormat:@"Menu Price:€ %@",allPoints.price];
+            [self.mapView addAnnotation:myAnnotation];
+            
+            
+        }
+        
+    }];
+    
+
     
 }
+
+
+
+-(void)loadFavorites
+{
+    
+     [self removeAllPinsButUserLocation];
+  
+    
+    PFQuery *query = [PFUser query];
+    
+    [query includeKey:@"favorite"];
+    
+    NSArray *listOfFavoritedRestaurants  = [query findObjects];
+    
+    //  [query findObjectsInBackgroundWithBlock:^(NSArray *checkData, NSError *error) {
+    
+    listOfFavoritedRestaurants  = [[NSArray alloc]initWithArray:[PFUser currentUser][@"favorite"]];
+    
+    //    NSLog(@"the datas are %@",checkData);
+    
+    self.listOfFavoritedRestaurants = listOfFavoritedRestaurants ;
+    
+}
+
 
 
 
 - (IBAction)viewFavRestaurants:(id)sender {
     
     
+    [self removeAllPinsButUserLocation];
     
+    PFQuery* query = [MenuDelDia query];
+    //[query whereKey:@"restaurant" containedIn:self.listOfFavoritedRestaurants];
+    
+    
+    NSMutableArray *restaurants = [[NSMutableArray alloc] init];
+    
+    for (NSString *objectId in self.listOfFavoritedRestaurants){
+        
+        Restaurant *restaurant = [Restaurant objectWithoutDataWithObjectId:objectId];
+        [restaurants addObject:restaurant];
+    }
+    
+    self.listOfRestaurantsIsFav = @[];
+    
+    [query whereKey:@"restaurant" containedIn:restaurants];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *listOfRestaurantsisFav, NSError *error) {
+        if (!error) {
+            
+            
+            NSLog(@"my list of restaurants %@",listOfRestaurantsisFav);
+            
+            
+            
+            // Do something with the found objects
+            
+            //query the latest date menu and the latest
+            
+            self.listOfRestaurantsIsFav = listOfRestaurantsisFav;
+            self.photos = [NSMutableArray array];
+            self.menuPhotos = [NSMutableArray array];
+            
+            for (NSInteger i = 0; i < listOfRestaurantsisFav.count; i++)
+            {
+                [self.photos addObject:[NSNull null]];
+                [self.menuPhotos addObject:[NSNull null]];
+            }
+            
+            
+            for (NSInteger i = 0; i < listOfRestaurantsisFav.count; i++)
+            {
+                MenuDelDia *menu = listOfRestaurantsisFav[i];
+                
+                PFFile* file = menu.restaurant[@"imageFile"];
+                [self getPhoto:file atIndex:i];
+                
+                PFFile* file2 = menu[@"imageFile"];
+                [self getMenuPhoto:file2 atIndex:i];
+            }
+
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+        
+        for (int i=0; i < [listOfRestaurantsisFav count]; i++) {
+            
+            MenuDelDia *allPoints = listOfRestaurantsisFav[i];
+            
+            NSLog(@"location map %@",allPoints.restaurant.location);
+            
+            CLLocationCoordinate2D annotationCoordinate = CLLocationCoordinate2DMake(allPoints.restaurant.location.latitude, allPoints.restaurant.location.longitude);
+            
+            MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
+            myAnnotation.coordinate = annotationCoordinate ;
+            myAnnotation.title = [NSString stringWithFormat:@"Name: %@",allPoints.restaurant.name];
+            myAnnotation.subtitle = [NSString stringWithFormat:@"Menu Price:€ %@",allPoints.price];
+            [self.mapView addAnnotation:myAnnotation];
+            
+            
+        }
+        
+    }];
+
     
 }
 
 
 
 
--(void)loadMenuDelDiaData
-
-{
-    
-}
 
 
 
@@ -336,7 +487,7 @@
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     
-  //  NSLog(@"Location changed");
+   NSLog(@"Location changed");
     
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1000.0f,1000.0f);
     
@@ -351,7 +502,8 @@
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
     
-  //  NSLog(@"Region changed");
+  
+    NSLog(@"Region changed");
 }
 
 
@@ -388,6 +540,18 @@
     [mv setRegion:region animated:YES];
 }
 
+
+
+
+- (void)removeAllPinsButUserLocation
+{
+    id userLocation = [self.mapView userLocation];
+    [self.mapView removeAnnotations:[self.mapView annotations]];
+    
+    if ( userLocation != nil ) {
+        [self.mapView addAnnotation:userLocation]; // will cause user location pin to blink
+    }
+}
 
 
 
@@ -478,7 +642,7 @@
 
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view{
     
-  //  NSLog(@"pin dropped ");
+    NSLog(@"pin dropped ");
     
     
 }

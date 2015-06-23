@@ -15,7 +15,6 @@
 
 
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
