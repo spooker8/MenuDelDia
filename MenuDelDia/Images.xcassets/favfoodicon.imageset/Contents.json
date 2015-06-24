@@ -3,11 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "fav-icon.png"
+      "filename" : "favfoodicon.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "favfoodicon-1.png"
     },
     {
       "idiom" : "universal",
