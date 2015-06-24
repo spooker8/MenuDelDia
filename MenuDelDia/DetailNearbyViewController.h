@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "Restaurant.h"
+#import "MenuDelDia.h"
 
 
 @interface DetailNearbyViewController : UIViewController
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNoLabel;
 
+
 @property (strong,nonatomic) NSString *restaurantID;
 @property (strong,nonatomic) NSString *restaurantName;
 @property (strong,nonatomic) NSString *addressName;
@@ -30,7 +32,8 @@
 @property (strong,nonatomic) NSString *phoneLabel;
 @property (nonatomic) PFGeoPoint *myGeopoint;
 
- //@property (strong,nonatomic) Restaurant* restaurant;
+@property (strong,nonatomic) Restaurant* restaurant;
+@property (strong,nonatomic) MenuDelDia* menu;
 
 
 

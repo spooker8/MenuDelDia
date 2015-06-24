@@ -14,7 +14,7 @@
 @dynamic  restaurant;
 @dynamic  price;
 @dynamic  updatedAt;
-
+@dynamic imageFile;
 
 
 + (void)load {

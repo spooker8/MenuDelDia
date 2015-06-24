@@ -82,7 +82,7 @@
     [self refreshUIControl];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
    
-    // self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+   
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -173,7 +173,8 @@
             
         }
         
-    }}
+    }
+}
 
 
 
@@ -210,8 +211,6 @@
     // calculate distance [location distance from Location : (const CLLocation *)];
     
 }
-
-
 
 
 -(void)getPhoto:(PFFile*)file atIndex:(NSInteger)index
@@ -254,15 +253,10 @@
  
     [query2 includeKey:@"restaurant"];
     
- //  [query2 whereKey:@"location" nearGeoPoint:self.restaurantGeopoint];
    
     [query2 findObjectsInBackgroundWithBlock:^(NSArray *menus, NSError *error) {
         if (!error) {
-            // The find succeeded.
-            //    NSLog(@"Successfully retrieved %lu scores.", objects.count);
-            // Do something with the found objects
-            
-            //query the latest date menu and the latest 
+          
             
             self.menus = menus;
             [self.tableView reloadData];
@@ -324,7 +318,7 @@
     NearbyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nearbycell"];
     
  
-    MenuDelDia *menu = self.menus[indexPath.row]; //what is happening here?
+    MenuDelDia *menu = self.menus[indexPath.row];
 
     if (self.photos.count > indexPath.row && self.photos[indexPath.row] != [NSNull null])
     {
@@ -371,15 +365,8 @@
             menuVC.detailMenuDelDiaImage = image;
         }
     
+         menuVC.restaurant = showMenu.restaurant;
     
-        menuVC.restaurantName = showMenu.restaurant.name;
-        menuVC.addressName = showMenu.restaurant.address;
-        menuVC.websiteURL = showMenu.restaurant.website;
-        menuVC.phoneLabel= showMenu.restaurant.telno;
-        menuVC.restaurantID = showMenu.restaurant.objectId;
-        menuVC.myGeopoint = showMenu.restaurant.location;
-
-     //   menuVC.restaurant = showMenu.restaurant;
     
         [self.navigationController pushViewController:menuVC animated:YES];
     

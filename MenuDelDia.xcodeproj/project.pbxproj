@@ -39,7 +39,7 @@
 		4428C5A81B2F18F800D938D3 /* NearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4428C5A71B2F18F800D938D3 /* NearbyViewController.m */; };
 		4428C5AB1B2F2A5C00D938D3 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4428C5AA1B2F2A5C00D938D3 /* MeViewController.m */; };
 		4428C5AE1B2F749C00D938D3 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4428C5AD1B2F749C00D938D3 /* MapViewController.m */; };
-		4435E9481B385ECB00F8AAFD /* RestaurantsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4435E9471B385ECB00F8AAFD /* RestaurantsList.m */; };
+		4435E9481B385ECB00F8AAFD /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4435E9471B385ECB00F8AAFD /* MyAnnotation.m */; };
 		44571E781B30508F00FBD2E4 /* NearbyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44571E771B30508F00FBD2E4 /* NearbyTableViewCell.m */; };
 		44571E7B1B305E5000FBD2E4 /* DetailNearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44571E7A1B305E5000FBD2E4 /* DetailNearbyViewController.m */; };
 		44AA3BE31B3157AF00178D20 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AA3BE21B3157AF00178D20 /* FavouriteViewController.m */; };
@@ -112,8 +112,8 @@
 		4428C5AA1B2F2A5C00D938D3 /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		4428C5AC1B2F749C00D938D3 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		4428C5AD1B2F749C00D938D3 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		4435E9461B385ECB00F8AAFD /* RestaurantsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsList.h; sourceTree = "<group>"; };
-		4435E9471B385ECB00F8AAFD /* RestaurantsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsList.m; sourceTree = "<group>"; };
+		4435E9461B385ECB00F8AAFD /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
+		4435E9471B385ECB00F8AAFD /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
 		44571E761B30508F00FBD2E4 /* NearbyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyTableViewCell.h; sourceTree = "<group>"; };
 		44571E771B30508F00FBD2E4 /* NearbyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyTableViewCell.m; sourceTree = "<group>"; };
 		44571E791B305E5000FBD2E4 /* DetailNearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailNearbyViewController.h; sourceTree = "<group>"; };
@@ -213,8 +213,6 @@
 			children = (
 				4428C5AC1B2F749C00D938D3 /* MapViewController.h */,
 				4428C5AD1B2F749C00D938D3 /* MapViewController.m */,
-				4435E9461B385ECB00F8AAFD /* RestaurantsList.h */,
-				4435E9471B385ECB00F8AAFD /* RestaurantsList.m */,
 			);
 			name = MapViewController;
 			sourceTree = "<group>";
@@ -284,6 +282,8 @@
 		4428C54C1B2EAFC400D938D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4435E9461B385ECB00F8AAFD /* MyAnnotation.h */,
+				4435E9471B385ECB00F8AAFD /* MyAnnotation.m */,
 				4428C54D1B2EAFC400D938D3 /* Info.plist */,
 				4428C54E1B2EAFC400D938D3 /* main.m */,
 			);
@@ -471,7 +471,7 @@
 				44571E781B30508F00FBD2E4 /* NearbyTableViewCell.m in Sources */,
 				4428C5551B2EAFC400D938D3 /* LoginViewController.m in Sources */,
 				4428C5521B2EAFC400D938D3 /* AppDelegate.m in Sources */,
-				4435E9481B385ECB00F8AAFD /* RestaurantsList.m in Sources */,
+				4435E9481B385ECB00F8AAFD /* MyAnnotation.m in Sources */,
 				4428C5AB1B2F2A5C00D938D3 /* MeViewController.m in Sources */,
 				4428C5A81B2F18F800D938D3 /* NearbyViewController.m in Sources */,
 				44571E7B1B305E5000FBD2E4 /* DetailNearbyViewController.m in Sources */,

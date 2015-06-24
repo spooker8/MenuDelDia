@@ -252,12 +252,13 @@
         menuVC.detailMenuDelDiaImage = image;
     }
     
+    menuVC.restaurant = showMenu.restaurant;
     
-    menuVC.restaurantName = showMenu.restaurant.name;
-    menuVC.addressName = showMenu.restaurant.address;
-    menuVC.websiteURL = showMenu.restaurant.website;
-    menuVC.phoneLabel= showMenu.restaurant.telno;
-    menuVC.restaurantID = showMenu.restaurant.objectId;
+//    menuVC.restaurantName = showMenu.restaurant.name;
+//    menuVC.addressName = showMenu.restaurant.address;
+//    menuVC.websiteURL = showMenu.restaurant.website;
+//    menuVC.phoneLabel= showMenu.restaurant.telno;
+//    menuVC.restaurantID = showMenu.restaurant.objectId;
   //  menuVC.myGeopoint = showMenu.restaurant.location;
     
     //   menuVC.restaurant = showMenu.restaurant;
@@ -266,6 +267,8 @@
     
     
 }
+
+
 
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 //{

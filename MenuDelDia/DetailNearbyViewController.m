@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *button;
 @property (nonatomic) BOOL clicked;
 @property (nonatomic) BOOL favoriteCheck;
-
+@property (strong, nonatomic) NSArray *checkData;
 
 @end
 
@@ -30,17 +30,17 @@
     
     
        
-    self.restaurantNameLabel.text = self.restaurantName;
-    self.addressLabel.text = self.addressName;
-    self.websiteLabel.text = self.websiteURL;
-    self.phoneNoLabel.text = self.phoneLabel;
+    self.restaurantNameLabel.text = self.restaurant.name;
+    self.addressLabel.text = self.restaurant.address;
+    self.websiteLabel.text = self.restaurant.website;
+    self.phoneNoLabel.text = self.restaurant.telno;
     
     self.menuDelDiaImage.image = self.detailMenuDelDiaImage;
    
-    self.restaurantID = self.restaurantID;
+    self.restaurantID = self.restaurant.objectId;
     
     
-    
+    [self getMenuPhoto:self.menu[@"imageFile"]];
     
     
    
@@ -50,21 +50,32 @@
 }
 
 
+-(void)getMenuPhoto:(PFFile*)file
+{
+    [file getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+        if (!error) {
+            UIImage *image = [UIImage imageWithData:imageData];
+            self.menuDelDiaImage.image = image;
+            
+            
+            
+        }
+    }];
+    
+}
+
 -(void)isFav
 {
     
   
-    PFQuery *query = [PFUser query];
-  
-   [query findObjectsInBackgroundWithBlock:^(NSArray *checkData, NSError *error) {
-       
+    PFUser *currentUser = [PFUser currentUser];
    
-    checkData = [[NSArray alloc]initWithArray:[PFUser currentUser][@"favorite"]];
+    self.checkData = currentUser[@"favorite"];
    
    // NSLog(@"the datas are %@",checkData);
  
       
-            if ([checkData containsObject:self.restaurantID])
+            if ([self.checkData containsObject:self.restaurantID])
             {
                 NSLog(@"%@  is made favorite",self.restaurantID);
                 _favoriteCheck = YES;
@@ -88,50 +99,7 @@
                 
             }
             
-       
-        
-//        for (int i = 0 ; i < [muteCheckRestID count];  i++)
-//            
-//        {
-//            
-//            if ([[muteCheckRestID objectAtIndex:i] isEqualToString:self.restaurantID])
-//            {
-//                NSLog(@"%@ this restaurant is made favorite",self.restaurantID);
-//                [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//                 [_button setTitle:@"Fav On" forState:UIControlStateSelected];
-//                [_button setBackgroundColor:[UIColor redColor]];
-//            }
-//            
-//            
-//            else
-//            {
-//                NSLog(@"%@ this restaurant is not made favorite",self.restaurantID);
-//                [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//                [_button setTitle:@"Fav Off" forState:UIControlStateNormal];
-//                [_button setBackgroundColor:[UIColor whiteColor]];
-//
-//                
-//            }
-//            
-//        }
-
-        
-        
-        
-        
-        
-    //   NSArray *checkIfExist = [NSArray alloc]initWithArray:[[PFUser currentUser][@"favorite"] ];
-//                                                                                  
-//        
-//        
-//        if ([PFUser currentUser][@"favorite"] == self.restaurantID) {
-//
-//        }
-//        
-//
-//
-//
-    }];
+ 
 
     }
 
@@ -176,15 +144,6 @@
     NSLog(@"%@",self.myGeopoint);
     
     
-//    
-//    ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
-//        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"comgooglemaps://?center=%f,%f&q=%f,%f",mosqueLocation.latitude,mosqueLocation.longitude, mosqueLocation.latitude,mosqueLocation.longitude]];
-//        [[UIApplication sharedApplication] openURL:url];
-//    } else {
-//        NSLog(@"Can't use comgooglemaps://");
-//    }
-    
-    
     
 }
 
@@ -201,52 +160,6 @@
 }
 
 
-
-
-//-(void)makeFavorite {
-//    
-//    
-//
-//     PFUser *user = [PFUser currentUser];
-//    
-//     PFQuery *query = [PFUser query];
-//
-//   // NSLog(@"%@",user);
-//
-//    // [query includeKey:@"favorite"];
-//   //  [query selectKeys:@[@"favorite"]];
-//    
-//    
-//  //  [query includeKey:@"favorite"];
-// [query findObjectsInBackgroundWithBlock:^(NSArray *object, NSError *error) {
-//     
-//      if (!error) {
-//  
-//    NSArray *restaurantID = user[@"favorite"];
-//    
-//   // NSLog(@"%@",[PFUser currentUser][@"favorite"]);
-//     NSLog(@"%@",restaurantID);
-//     
-//          NSMutableArray *muterestArray = [[NSMutableArray alloc]initWithArray:restaurantID];
-//          
-//          self.muteArrayRestaurantID = muterestArray;
-//          
-//          [self.muteArrayRestaurantID addObject:self.restaurantID];
-//          
-//          NSArray *nsArrayofMuteArray = [[NSArray alloc] initWithArray:self.muteArrayRestaurantID];
-//          
-//          self.arrayRestaurantID = nsArrayofMuteArray;
-//          
-//          NSLog(@"%@",self.arrayRestaurantID);
-//      }
-//      else {
-//          NSLog(@"error");
-//      }
-//
-//     
-// }];
-//    
-//}
 
 
 -(void)saveFavoriteToParse {
@@ -293,59 +206,11 @@
 
 
 
-
-//PFQuery *query = [PFUser query];
-//[query whereKey:@"gender" equalTo:@"female"]; // find all the women
-//NSArray *girls = [query findObjects];
-
-//    
-//    self.muteArrayRestaurantID = [[NSMutableArray alloc] init];
-//    [self.muteArrayRestaurantID addObject:self.restaurantID];
-//    
-//    NSArray *restaurantIDArray = [[NSArray alloc] initWithArray:self.muteArrayRestaurantID];
-//    
-//    NSLog(@"%@",restaurantIDArray);
-//    
-//    PFObject *user = [PFObject objectWithClassName:@"Restaurants"];
-//    user.
-//    
-
-    
-//    PFUser *user = [PFUser user];
-//    user.username = self.usernameField.text;
-//    
-//     menuDelDia[@"restaurant"] = self.selRest;
-//    
-//    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (!error) {
-//            // Hooray! Let them use the app now.
-//                   } else {
-//            NSString *errorString = [error userInfo][@"error"];
-//            NSLog(@"error: %@", errorString);
-//                    }
-//    }];
-//    
-//    
-//    
-//}
-
-
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

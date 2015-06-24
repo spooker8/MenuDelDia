@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSDate *updatedAt;
 @property (strong, nonatomic) NSString *price;
 @property (strong, nonatomic) Restaurant *restaurant;
+@property (strong, nonatomic) PFFile *imageFile;
+
 
 
 @end
