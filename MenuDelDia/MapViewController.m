@@ -195,57 +195,10 @@
         PFFile* menuPhoto = menu[@"imageFile"];
         [self getMenuPhoto:menuPhoto atIndex:i];
 
-        
-        
+               
     }
     
     
-//    
-//    
-//    for (NSInteger i = 0; i < menus.count; i++)
-//    {
-//        [self.photos addObject:[NSNull null]];
-//        [self.menuPhotos addObject:[NSNull null]];
-//    }
-//    
-//    
-//    for (NSInteger i = 0; i < menus.count; i++)
-//    {
-//        MenuDelDia *menu = menus[i];
-//        
-//        PFFile* file = menu.restaurant[@"imageFile"];
-//        [self getPhoto:file atIndex:i];
-//        
-//        PFFile* file2 = menu[@"imageFile"];
-//        [self getMenuPhoto:file2 atIndex:i];
-//    }
-////
-//    for (int i=0; i < [menus count]; i++) {
-//        
-//        MenuDelDia *menu = menus[i];
-//        
-//        PFGeoPoint *location = menu.restaurant.location;
-//        
-//     //   NSLog(@"location map %@",location);
-//        
-//        CLLocationCoordinate2D annotationCoordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
-//        
-//        BOOL isFavRestaurant = [self.listOfFavoritedRestaurants containsObject:menu.restaurant.objectId];
-//        
-//        
-//
-//        MyAnnotation *myAnnotation = [[MyAnnotation alloc] init];
-//        myAnnotation.menu = menu;
-//        myAnnotation.isFav = isFavRestaurant;
-//        myAnnotation.coordinate = annotationCoordinate ;
-//        myAnnotation.title = [NSString stringWithFormat:@"Name: %@",menu.restaurant.name];
-//        myAnnotation.subtitle = [NSString stringWithFormat:@"Menu Price:€ %@",menu.price];
-//        myAnnotation.objectID = menu.restaurant.objectId;
-//        [self.mapView addAnnotation:myAnnotation];
-//        
-    
-        
-   // }
 }
 
 
@@ -263,22 +216,10 @@
     {
         
         Restaurant *myRestaurant = (Restaurant *)annotation;
-        
-        // Try to dequeue an existing pin view first.
-        MKAnnotationView *pinView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"MyRestaurantAnnotation"];
-        if (!pinView)
-        {
-            BOOL isFav = [self.listOfFavoritedRestaurants containsObject:myRestaurant];
-            pinView = [myRestaurant annotationView:isFav];
-            
-            
-        } else {
-            
-            pinView.annotation = annotation;
-            
-                }
-       
-        return pinView;
+
+        BOOL isFav = [self.listOfFavoritedRestaurants containsObject:myRestaurant.objectId];
+
+        return [myRestaurant annotationView:isFav];
     }
     return nil;
 }
@@ -375,6 +316,7 @@
             
 
             [self showMenus:menus];
+            
             
             
         } else {
@@ -734,5 +676,54 @@
  }
 
  */
+
+
+//
+//
+//    for (NSInteger i = 0; i < menus.count; i++)
+//    {
+//        [self.photos addObject:[NSNull null]];
+//        [self.menuPhotos addObject:[NSNull null]];
+//    }
+//
+//
+//    for (NSInteger i = 0; i < menus.count; i++)
+//    {
+//        MenuDelDia *menu = menus[i];
+//
+//        PFFile* file = menu.restaurant[@"imageFile"];
+//        [self getPhoto:file atIndex:i];
+//
+//        PFFile* file2 = menu[@"imageFile"];
+//        [self getMenuPhoto:file2 atIndex:i];
+//    }
+////
+//    for (int i=0; i < [menus count]; i++) {
+//
+//        MenuDelDia *menu = menus[i];
+//
+//        PFGeoPoint *location = menu.restaurant.location;
+//
+//     //   NSLog(@"location map %@",location);
+//
+//        CLLocationCoordinate2D annotationCoordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
+//
+//        BOOL isFavRestaurant = [self.listOfFavoritedRestaurants containsObject:menu.restaurant.objectId];
+//
+//
+//
+//        MyAnnotation *myAnnotation = [[MyAnnotation alloc] init];
+//        myAnnotation.menu = menu;
+//        myAnnotation.isFav = isFavRestaurant;
+//        myAnnotation.coordinate = annotationCoordinate ;
+//        myAnnotation.title = [NSString stringWithFormat:@"Name: %@",menu.restaurant.name];
+//        myAnnotation.subtitle = [NSString stringWithFormat:@"Menu Price:€ %@",menu.price];
+//        myAnnotation.objectID = menu.restaurant.objectId;
+//        [self.mapView addAnnotation:myAnnotation];
+//
+
+
+// }
+
 
 @end

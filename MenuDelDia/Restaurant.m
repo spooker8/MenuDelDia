@@ -64,7 +64,6 @@
     MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:self reuseIdentifier:@"MyRestaurantAnnotation"];
     
     
-    
     if (!isFav) {
         annotationView.image = [UIImage imageNamed:@"foodicon"];
         
