@@ -52,7 +52,7 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
     
-   
+  
 
  
     return YES;

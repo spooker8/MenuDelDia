@@ -19,5 +19,4 @@
 @property (strong, nonatomic) PFFile *imageFile;
 
 
-
 @end

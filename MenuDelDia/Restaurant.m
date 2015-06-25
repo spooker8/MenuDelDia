@@ -7,6 +7,7 @@
 //
 
 #import "Restaurant.h"
+#import <ParseUI/ParseUI.h>
 
 @implementation Restaurant
 
@@ -43,6 +44,16 @@
     return self.name;
 }
 
+//-(NSString*)subtitle
+//{
+//    NSString *telno = [NSString stringWithFormat:@"Tel no %@",self.telno];
+//    
+//    return telno;
+//}
+
+
+
+
 
 
 
@@ -57,18 +68,35 @@
     if (!isFav) {
         annotationView.image = [UIImage imageNamed:@"foodicon"];
         
-    }
-    
-    if (isFav) {
+    } else {
+ 
         annotationView.image = [UIImage imageNamed:@"favfoodicon"];
         
     }
     
     
-    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeInfoDark];
+  
     
-    UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"foodicon"]];
-    annotationView.leftCalloutAccessoryView = iconView;
+     PFFile* menuPhoto = self[@"imageFile"];
+    
+    [menuPhoto getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+        if (!error) {
+            UIImage *image = [UIImage imageWithData:imageData];
+            
+            UIImageView *thumbnailImageView = [[UIImageView alloc] initWithImage:image];
+            
+           thumbnailImageView.contentMode = UIViewContentModeScaleAspectFit;
+           thumbnailImageView.frame = CGRectMake(0, 0, 50, 50);
+            
+            annotationView.leftCalloutAccessoryView = thumbnailImageView;
+            
+        }
+    }];
+    
+    
+    
+    
     
     annotationView.enabled = YES;
     annotationView.canShowCallout = YES;
@@ -76,6 +104,10 @@
     
     return annotationView;
 }
+
+
+
+
 
 
 @end
