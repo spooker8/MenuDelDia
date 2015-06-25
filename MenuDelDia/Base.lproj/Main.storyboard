@@ -107,7 +107,7 @@
                                     <action selector="loginButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0nz-zV-ce4"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="1gz-KF-fbF">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newlogo" translatesAutoresizingMaskIntoConstraints="NO" id="1gz-KF-fbF">
                                 <rect key="frame" x="92" y="28" width="190" height="193"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="username-icon" translatesAutoresizingMaskIntoConstraints="NO" id="HQv-uj-HvA">
@@ -190,11 +190,11 @@
                                 <color key="textColor" red="0.99738579559999996" green="0.99090082400000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="5ct-iF-jkA">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newlogo" translatesAutoresizingMaskIntoConstraints="NO" id="5ct-iF-jkA">
                                 <rect key="frame" x="119" y="40" width="137" height="131"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.049999999999999684" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="euQ-DP-I69">
-                                <rect key="frame" x="0.0" y="558" width="534" height="63"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.049999999999999684" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="menu-title" translatesAutoresizingMaskIntoConstraints="NO" id="euQ-DP-I69">
+                                <rect key="frame" x="0.0" y="531" width="534" height="90"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -761,14 +761,14 @@
         <image name="email" width="256" height="256"/>
         <image name="fav-icon" width="22" height="22"/>
         <image name="free-blurred-web-backgrounds-10" width="1920" height="1440"/>
-        <image name="logo" width="517" height="56"/>
         <image name="me-icon" width="22" height="22"/>
+        <image name="menu-title" width="472" height="91"/>
         <image name="myphoto" width="631" height="631"/>
         <image name="name-icon" width="256" height="256"/>
         <image name="nearby-icon" width="22" height="22"/>
+        <image name="newlogo" width="600" height="600"/>
         <image name="password-icon" width="48" height="48"/>
         <image name="search-icon" width="22" height="22"/>
-        <image name="title" width="553" height="593"/>
         <image name="username-icon" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>

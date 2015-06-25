@@ -10,19 +10,19 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="free-blurred-web-backgrounds-10" translatesAutoresizingMaskIntoConstraints="NO" id="Y0d-NP-Nho">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y0d-NP-Nho">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="qrZ-wi-uRI">
-                    <rect key="frame" x="30" y="466" width="314" height="37"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newlogo" translatesAutoresizingMaskIntoConstraints="NO" id="f5o-Vk-97b">
+                    <rect key="frame" x="55" y="131" width="265" height="279"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="f5o-Vk-97b">
-                    <rect key="frame" x="55" y="161" width="265" height="279"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="menu-title" translatesAutoresizingMaskIntoConstraints="NO" id="qrZ-wi-uRI">
+                    <rect key="frame" x="55" y="371" width="265" height="44"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Where do you want to eat today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1a-fn-6oM">
-                    <rect key="frame" x="30" y="507" width="314" height="23"/>
+                    <rect key="frame" x="30" y="420" width="314" height="23"/>
                     <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
@@ -33,8 +33,7 @@
         </view>
     </objects>
     <resources>
-        <image name="free-blurred-web-backgrounds-10" width="1920" height="1440"/>
-        <image name="logo" width="517" height="56"/>
-        <image name="title" width="553" height="593"/>
+        <image name="menu-title" width="472" height="91"/>
+        <image name="newlogo" width="600" height="600"/>
     </resources>
 </document>
