@@ -1,5 +1,5 @@
 //
-//  Model.h
+//  Restauran.h
 //  MenuDelDia
 //
 //  Created by Anand Kumar on 6/15/15.

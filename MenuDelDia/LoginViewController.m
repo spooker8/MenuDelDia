@@ -36,9 +36,7 @@
 
 - (IBAction)loginButton:(id)sender {
     
- 
-    
-    
+  
     [PFUser logInWithUsernameInBackground:self.usernameField.text
                                  password:self.passwordField.text
                                     block:^(PFUser *user, NSError *error) {
@@ -81,11 +79,7 @@
                                             
                                             
                                             [self presentViewController:alert animated:YES completion:nil];
-
-                                            
-                                            
-                                            
-                                            NSString *errorString = [error userInfo][@"error"];
+                                         NSString *errorString = [error userInfo][@"error"];
                                             NSLog(@"error: %@", errorString);
                                             
                                             

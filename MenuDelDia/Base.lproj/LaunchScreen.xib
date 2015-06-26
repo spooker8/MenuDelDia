@@ -14,9 +14,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newlogo" translatesAutoresizingMaskIntoConstraints="NO" id="f5o-Vk-97b">
-                    <rect key="frame" x="55" y="131" width="265" height="279"/>
-                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="menu-title" translatesAutoresizingMaskIntoConstraints="NO" id="qrZ-wi-uRI">
                     <rect key="frame" x="55" y="371" width="265" height="44"/>
                 </imageView>
@@ -25,6 +22,9 @@
                     <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newlogo" translatesAutoresizingMaskIntoConstraints="NO" id="f5o-Vk-97b">
+                    <rect key="frame" x="55" y="133" width="265" height="279"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedStatusBarMetrics"/>

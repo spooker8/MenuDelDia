@@ -86,7 +86,7 @@
             UIImageView *thumbnailImageView = [[UIImageView alloc] initWithImage:image];
             
            thumbnailImageView.contentMode = UIViewContentModeScaleAspectFit;
-           thumbnailImageView.frame = CGRectMake(0, 0, 50, 50);
+           thumbnailImageView.frame = CGRectMake(0, 0, 40, 40);
             
             annotationView.leftCalloutAccessoryView = thumbnailImageView;
             

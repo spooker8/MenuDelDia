@@ -12,6 +12,9 @@
 #import "Restaurant.h"
 #import <Parse/Parse.h>
 #import <MobileCoreServices/UTCoreTypes.h>
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+
 
 @interface DetailNearbyViewController ()
 
@@ -26,24 +29,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    
        
     self.restaurantNameLabel.text = self.restaurant.name;
     self.addressLabel.text = self.restaurant.address;
     self.websiteLabel.text = self.restaurant.website;
     self.phoneNoLabel.text = self.restaurant.telno;
-    
     self.menuDelDiaImage.image = self.detailMenuDelDiaImage;
-   
     self.restaurantID = self.restaurant.objectId;
     
     
     [self getMenuPhoto:self.menu[@"imageFile"]];
-    
-    
-   
     [self isFav];
    
 
@@ -139,17 +134,30 @@
 }
 
 - (IBAction)gotoMapAction:(id)sender {
-    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"comgooglemaps://%@",self.myGeopoint]]];
-    NSLog(@"%@",self.myGeopoint);
-    
-    
+  
+    Class mapItemClass = [MKMapItem class];
+    if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
+    {
+        // Create an MKMapItem to pass to the Maps app
+        CLLocationCoordinate2D coordinate =
+        CLLocationCoordinate2DMake(self.restaurant.location.latitude,self.restaurant.location.longitude);
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate
+                                                       addressDictionary:nil];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [mapItem setName:self.restaurant.name];
+        // Pass the map item to the Maps app
+      
+        [mapItem openInMapsWithLaunchOptions:nil];
+    }
+      
     
 }
 
 - (IBAction)gotoWebsiteAction:(id)sender {
     
-     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.websiteURL]];
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.restaurant.website]];
+    
+    NSLog(@"%@",self.restaurant.website);
 }
 
 - (IBAction)gotoCallAction:(id)sender {

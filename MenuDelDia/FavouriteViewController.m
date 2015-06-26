@@ -16,27 +16,20 @@
 
 @interface FavouriteViewController () <UITableViewDelegate, UITableViewDataSource>
 
+
+
 @property(strong,nonatomic)NSArray *listOfFavoritedRestaurants;
-
-
-
-
-
 @property (strong, nonatomic) PFUser *user;
 
 //menu del dia
 @property (strong, nonatomic) NSArray *listOfRestaurantsIsFav;
 @property (strong, nonatomic) NSMutableArray* menuPhotos;
-
 @property (strong, nonatomic) NSMutableArray* photos;
-
-
-
 @property (nonatomic, strong) NSIndexPath* lastSelectedIndex;
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
-
-
 @end
+
+
 
 @implementation FavouriteViewController
 
@@ -51,23 +44,12 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     // You code here to update the view.
-    
-    
-    
+   
     [self loadFavorites];
     [self loadMenuDelDia];
-
-
     [self.tableView reloadData];
-
-    
-    
     
 }
-
-
-
-
 
 
 
@@ -75,14 +57,13 @@
 {
     
     PFQuery *query = [PFUser query];
-    
     [query includeKey:@"favorite"];
     
     NSArray *listOfFavoritedRestaurants  = [query findObjects];
     
-  //  [query findObjectsInBackgroundWithBlock:^(NSArray *checkData, NSError *error) {
+         //  [query findObjectsInBackgroundWithBlock:^(NSArray *checkData, NSError *error) {
         
-    listOfFavoritedRestaurants  = [[NSArray alloc]initWithArray:[PFUser currentUser][@"favorite"]];
+       listOfFavoritedRestaurants  = [[NSArray alloc]initWithArray:[PFUser currentUser][@"favorite"]];
     
         //    NSLog(@"the datas are %@",checkData);
         
@@ -99,9 +80,9 @@
         //[query whereKey:@"restaurant" containedIn:self.listOfFavoritedRestaurants];
     
     
-    NSMutableArray *restaurants = [[NSMutableArray alloc] init];
+        NSMutableArray *restaurants = [[NSMutableArray alloc] init];
     
-    for (NSString *objectId in self.listOfFavoritedRestaurants){
+        for (NSString *objectId in self.listOfFavoritedRestaurants){
         
         Restaurant *restaurant = [Restaurant objectWithoutDataWithObjectId:objectId];
         [restaurants addObject:restaurant];
@@ -198,22 +179,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
 
     return [self.listOfRestaurantsIsFav count];
-    
-    
-    
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-    
+ 
     FavouriteViewControllerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"favoritecell"];
-    
     
     MenuDelDia *menu = self.listOfRestaurantsIsFav[indexPath.row];
     
@@ -223,15 +197,11 @@
         cell.restaurantImage.image = image;
     }
     
-  
     cell.restaurantNameLabel.text = menu.restaurant.name;
-    
-
-    
+   
     MenuDelDia *menuDelDiaModel = self.listOfRestaurantsIsFav[indexPath.row];
     cell.priceLabel.text = menuDelDiaModel.price;
-    
-    
+  
     return cell;
 }
 
@@ -254,81 +224,10 @@
     
     menuVC.restaurant = showMenu.restaurant;
     
-//    menuVC.restaurantName = showMenu.restaurant.name;
-//    menuVC.addressName = showMenu.restaurant.address;
-//    menuVC.websiteURL = showMenu.restaurant.website;
-//    menuVC.phoneLabel= showMenu.restaurant.telno;
-//    menuVC.restaurantID = showMenu.restaurant.objectId;
-  //  menuVC.myGeopoint = showMenu.restaurant.location;
-    
-    //   menuVC.restaurant = showMenu.restaurant;
-    
     [self.navigationController pushViewController:menuVC animated:YES];
     
     
 }
-
-
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    // Return the number of sections.
-//    if ([self.listOfRestaurants count]) {
-//        
-//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//        return 1;
-//        
-//    } else {
-//        
-//        // Display a message when the table is empty
-//        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-//        
-//        messageLabel.text = @"No data is currently available. Please pull down to refresh.";
-//        messageLabel.textColor = [UIColor blackColor];
-//        messageLabel.numberOfLines = 0;
-//        messageLabel.textAlignment = NSTextAlignmentCenter;
-//        messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
-//        [messageLabel sizeToFit];
-//        
-//        self.tableView.backgroundView = messageLabel;
-//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        
-//    }
-//    
-//    return 0;
-//}
-
-
-
-
-//old find all data method.
-// The find succeeded.
-//      NSLog(@"Successfully retrieved %lu scores.", menus.count);
-
-
-
-//                for (int i = 0; i < [self.listOfFavoritedRestaurants count]; i++) {
-//
-//                    if (![menus containsObject:self.listOfFavoritedRestaurants]) {
-//                        NSLog(@"yes");
-//
-//                        NSMutableArray *listOfData = [[NSMutableArray alloc] initWithArray:[menus containsObject:self.listOfFavoritedRestaurants]];
-//
-//
-//
-//                    }
-//                    else {
-//
-//                         NSLog(@"no");
-//                    }
-//
-//
-//                }
-
-//  if([collection containsObject:tempItem])
-
-
-
 
 
 

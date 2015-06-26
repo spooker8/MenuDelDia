@@ -24,15 +24,10 @@
 @property (nonatomic) BOOL *isFavRestaurant;
 
 
-
 @property(strong,nonatomic)NSArray *listOfFavoritedRestaurants;
-
 @property (nonatomic, strong) CLLocation *selectedLocation;
 @property (strong, nonatomic) CLLocationManager *locationManager;
-
-
 @property (nonatomic) PFGeoPoint *myGeopoint;
-
 @property (strong, nonatomic) NSMutableArray* photos;
 @property (strong, nonatomic) PFUser *user;
 @property (nonatomic) int index;
@@ -41,9 +36,7 @@
 //menu del dia
 @property (strong, nonatomic) NSArray *menus;
 @property (strong, nonatomic) NSMutableArray* menuPhotos;
-
 @property (strong, nonatomic) NSMutableArray *restaurants;
-
 @property (strong,nonatomic) Restaurant* restaurant;
 
 
@@ -67,10 +60,7 @@
      self.locationManager = [[CLLocationManager alloc]init];
 
     
-      [self loadFavorites];
-    
-//    [self myAnnotation];
-    
+    [self loadFavorites];
     [self viewAllRestaurants:self];
 
    
@@ -83,8 +73,7 @@
     
  //   [self.mapView removeAnnotations:self.mapView.annotations];
  //   [self.mapView addAnnotations:self.mapView.annotations];
-
-    
+  
 }
 
 
@@ -96,7 +85,7 @@
     
     
     [self.locationManager stopUpdatingHeading];
-    [self.locationManager stopUpdatingLocation];
+ //   [self.locationManager stopUpdatingLocation];
     
 }
 
@@ -141,7 +130,6 @@
 {
  
   //  CLLocation *location= locations.lastObject;
-    
    // NSLog(@"didUpdateLocations %@", location);
     
 }
@@ -156,7 +144,7 @@
     
     MKCoordinateRegion viewRegion =
     
-    MKCoordinateRegionMakeWithDistance(myCoord, 10, 10);
+    MKCoordinateRegionMakeWithDistance(myCoord, 100, 100);
     
     MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
     
@@ -186,7 +174,6 @@
         i++;
         
         [self.restaurants addObject:menu.restaurant];
-        
         [self.mapView addAnnotation:menu.restaurant];
         
         PFFile* restaurantePhoto = menu.restaurant[@"imageFile"];
@@ -216,9 +203,7 @@
     {
         
         Restaurant *myRestaurant = (Restaurant *)annotation;
-
         BOOL isFav = [self.listOfFavoritedRestaurants containsObject:myRestaurant.objectId];
-
         return [myRestaurant annotationView:isFav];
     }
     return nil;
@@ -229,10 +214,10 @@
     
     if ([myAnnotation isKindOfClass:[Restaurant class]])
     {
-        NSLog(@"Show restaurant");
+       // NSLog(@"Show restaurant");
         
         
-        DetailNearbyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"pushdetailnearbyviewcontroller"];
+        DetailNearbyViewController *controller = [self.storyboard       instantiateViewControllerWithIdentifier:@"pushdetailnearbyviewcontroller"];
         Restaurant *restaurant = (id)myAnnotation;
         
         
@@ -254,7 +239,6 @@
     
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.mapView addAnnotations:self.mapView.annotations];
-
     [self removeAllPinsButUserLocation];
 
     
@@ -288,11 +272,10 @@
     
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.mapView addAnnotations:self.mapView.annotations];
-
     [self removeAllPinsButUserLocation];
     
     PFQuery* query = [MenuDelDia query];
-    //[query whereKey:@"restaurant" containedIn:self.listOfFavoritedRestaurants];
+   
 
     [query includeKey:@"restaurant"];
 
@@ -306,9 +289,6 @@
     }
     
     [query whereKey:@"restaurant" containedIn:restaurants];
-    
-    
-    
     [query findObjectsInBackgroundWithBlock:^(NSArray *menus, NSError *error) {
 
         
@@ -342,10 +322,6 @@
         if (!error) {
             UIImage *image = [UIImage imageWithData:imageData];
             self.photos[index] = image;
-            
-  
-            
-            
         }
     }];
     
@@ -375,8 +351,6 @@
   // NSLog(@"Location changed");
     
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1000.0f,1000.0f);
-    
-    
     MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:region];
     
     [self.mapView setRegion:adjustedRegion animated:YES];
@@ -390,7 +364,6 @@
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
     
-  
  //   NSLog(@"Region changed");
 }
 
@@ -450,7 +423,6 @@
 {
     
     [self removeAllPinsButUserLocation];
-    
     self.listOfFavoritedRestaurants = [PFUser currentUser][@"favorite"];
     
 }

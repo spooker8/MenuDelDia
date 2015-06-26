@@ -13,7 +13,5 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *restaurantNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-
 @property (weak, nonatomic) IBOutlet UIImageView *restaurantImage;
-
 @end

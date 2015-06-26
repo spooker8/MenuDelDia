@@ -108,9 +108,9 @@
         self.refreshControl.attributedTitle = attributedTitle;
 
     
-    [self.refreshControl endRefreshing];
+        [self.refreshControl endRefreshing];
     
-}
+        }
 }
 
 -(void)refreshUIControl{
@@ -155,8 +155,6 @@
   
             [self.locationManager requestWhenInUseAuthorization];
             
-            
-            
             self.locationManager.delegate = self;
             self.locationManager.desiredAccuracy =
             kCLLocationAccuracyBest;
@@ -186,18 +184,9 @@
     
     CLLocation *location= locations.lastObject;
     
-   //   NSLog(@"didUpdateLocations %@", location);
-    
-    
-    
-   // self.restaurantLatitude = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
-    
-   // self.restaurantLatitude = location.coordinate.latitude;
-   // self.restaurantLongitude =location.coordinate.longitude;
-    
      CLLocation *LocationActual = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
     
-    // self.restaurantGeopoint = LocationAtual;
+ 
     
     //converted geopoint data
     PFGeoPoint *myGeoPoint = [PFGeoPoint geoPointWithLocation:(CLLocation *)LocationActual];
@@ -206,10 +195,7 @@
     
   //  NSLog(@"%@",restaurantGeoPoint);
     
-    
-    
-    // calculate distance [location distance from Location : (const CLLocation *)];
-    
+
 }
 
 
@@ -336,7 +322,7 @@
    // NSLog(@"%@",restaurantGeopoint);
     
     double distanceDouble  = [self.myGeopoint distanceInKilometersTo:restaurantGeopoint];
-  //  NSLog(@"Distance: %.1f",distanceDouble);
+
     
     cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f KM",distanceDouble];
 
@@ -355,7 +341,7 @@
     
        MenuDelDia *showMenu = self.menus[indexPath.row];
     
-    DetailNearbyViewController *menuVC = [self.storyboard
+       DetailNearbyViewController *menuVC = [self.storyboard
                 instantiateViewControllerWithIdentifier:@"pushdetailnearbyviewcontroller"];
     
    
@@ -410,11 +396,6 @@
         [(UINavigationController*)viewController popToRootViewControllerAnimated:YES];
     }
 }
-
-
-
-
-
 
 
 
