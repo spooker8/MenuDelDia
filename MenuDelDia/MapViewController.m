@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *viewFavActionButton;
 @property (weak, nonatomic) IBOutlet UIButton *viewAllActionButton;
 @property (nonatomic) BOOL *isFavRestaurant;
+@property(nonatomic) BOOL hasUpdateRegion;
 
 
 @property(strong,nonatomic)NSArray *listOfFavoritedRestaurants;
@@ -42,9 +43,11 @@
 
 @end
 
+
+
 @implementation MapViewController
 
-
+@synthesize coordinate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,10 +57,10 @@
     self.photos = [NSMutableArray array];
     self.menuPhotos = [NSMutableArray array];
     
-     [self startCoreLocation];
+    [self startCoreLocation];
     
      self.mapView.showsUserLocation = YES;
-     self.locationManager = [[CLLocationManager alloc]init];
+  //   self.locationManager = [[CLLocationManager alloc]init];
 
     
     [self loadFavorites];
@@ -74,6 +77,10 @@
  //   [self.mapView removeAnnotations:self.mapView.annotations];
  //   [self.mapView addAnnotations:self.mapView.annotations];
   
+    [self loadFavorites];
+    [self viewAllRestaurants:self];
+    
+
 }
 
 
@@ -101,10 +108,7 @@
             
         {
             
-            
             [self.locationManager requestWhenInUseAuthorization];
-            
-            
             
             self.locationManager.delegate = self;
             self.locationManager.desiredAccuracy =
@@ -144,7 +148,7 @@
     
     MKCoordinateRegion viewRegion =
     
-    MKCoordinateRegionMakeWithDistance(myCoord, 100, 100);
+    MKCoordinateRegionMakeWithDistance(myCoord, 300, 300);
     
     MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
     
@@ -237,8 +241,8 @@
 - (IBAction)viewAllRestaurants:(id)sender {
     
     
-    [self.mapView removeAnnotations:self.mapView.annotations];
-    [self.mapView addAnnotations:self.mapView.annotations];
+  //  [self.mapView removeAnnotations:self.mapView.annotations];
+   // [self.mapView addAnnotations:self.mapView.annotations];
     [self removeAllPinsButUserLocation];
 
     
@@ -270,8 +274,8 @@
 
 - (IBAction)viewFavRestaurants:(id)sender {
     
-    [self.mapView removeAnnotations:self.mapView.annotations];
-    [self.mapView addAnnotations:self.mapView.annotations];
+ //   [self.mapView removeAnnotations:self.mapView.annotations];
+ //   [self.mapView addAnnotations:self.mapView.annotations];
     [self removeAllPinsButUserLocation];
     
     PFQuery* query = [MenuDelDia query];
@@ -350,12 +354,17 @@
     
   // NSLog(@"Location changed");
     
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1000.0f,1000.0f);
-    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:region];
+    if(!_hasUpdateRegion) {
     
-    [self.mapView setRegion:adjustedRegion animated:YES];
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1000.0f,1000.0f);
+        MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:region];
+    
+        [self.mapView setRegion:adjustedRegion animated:YES];
+        self.hasUpdateRegion = YES;
+    }
     
     
+    //have a boolean that is only done once.
 }
 
 
@@ -397,11 +406,16 @@
 
 - (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
 {
-    MKAnnotationView *annotationView = [views objectAtIndex:0];
+/*    MKAnnotationView *annotationView = [views objectAtIndex:0];
     id<MKAnnotation> mp = [annotationView annotation];
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([mp coordinate] ,250,250);
     
-    [mv setRegion:region animated:YES];
+    [mv setRegion:region animated:YES];*/
+    
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mv.userLocation.coordinate, 1000.0f,1000.0f);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:region];
+    
+    [self.mapView setRegion:adjustedRegion animated:YES];
 }
 
 
@@ -416,7 +430,6 @@
         [self.mapView addAnnotation:userLocation]; // will cause user location pin to blink
     }
 }
-
 
 
 -(void)loadFavorites
@@ -599,103 +612,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-
-
-/*
- // The find succeeded.
- NSLog(@"Successfully retrieved %lu scores.", menus.count);
- // Do something with the found objects
- 
- //query the latest date menu and the latest
- 
- self.menus = menus;
- //      [self.tableView reloadData];
- 
- self.photos = [NSMutableArray array];
- self.menuPhotos = [NSMutableArray array];
- 
- for (NSInteger i = 0; i < menus.count; i++)
- {
- [self.photos addObject:[NSNull null]];
- [self.menuPhotos addObject:[NSNull null]];
- 
- MenuDelDia *menu = menus[i];
- 
- PFFile* file = menu.restaurant[@"imageFile"];
- [self getPhoto:file atIndex:i];
- 
- PFFile* file2 = menu[@"imageFile"];
- [self getMenuPhoto:file2 atIndex:i];
- }
- 
- 
- for (int i=0; i < [self.menus count]; i++) {
- 
- MenuDelDia *allPoints = self.menus[i];
- 
- NSLog(@"%@",allPoints.restaurant.location);
- 
- CLLocationCoordinate2D annotationCoordinate = CLLocationCoordinate2DMake(allPoints.restaurant.location.latitude, allPoints.restaurant.location.longitude);
- 
- MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
- myAnnotation.coordinate = annotationCoordinate ;
- myAnnotation.title = [NSString stringWithFormat:@"Name: %@",allPoints.restaurant.name];
- myAnnotation.subtitle = [NSString stringWithFormat:@"Menu Price:€ %@",allPoints.price];
- [self.mapView addAnnotation:myAnnotation];
- 
- 
- }
-
- */
-
-
-//
-//
-//    for (NSInteger i = 0; i < menus.count; i++)
-//    {
-//        [self.photos addObject:[NSNull null]];
-//        [self.menuPhotos addObject:[NSNull null]];
-//    }
-//
-//
-//    for (NSInteger i = 0; i < menus.count; i++)
-//    {
-//        MenuDelDia *menu = menus[i];
-//
-//        PFFile* file = menu.restaurant[@"imageFile"];
-//        [self getPhoto:file atIndex:i];
-//
-//        PFFile* file2 = menu[@"imageFile"];
-//        [self getMenuPhoto:file2 atIndex:i];
-//    }
-////
-//    for (int i=0; i < [menus count]; i++) {
-//
-//        MenuDelDia *menu = menus[i];
-//
-//        PFGeoPoint *location = menu.restaurant.location;
-//
-//     //   NSLog(@"location map %@",location);
-//
-//        CLLocationCoordinate2D annotationCoordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
-//
-//        BOOL isFavRestaurant = [self.listOfFavoritedRestaurants containsObject:menu.restaurant.objectId];
-//
-//
-//
-//        MyAnnotation *myAnnotation = [[MyAnnotation alloc] init];
-//        myAnnotation.menu = menu;
-//        myAnnotation.isFav = isFavRestaurant;
-//        myAnnotation.coordinate = annotationCoordinate ;
-//        myAnnotation.title = [NSString stringWithFormat:@"Name: %@",menu.restaurant.name];
-//        myAnnotation.subtitle = [NSString stringWithFormat:@"Menu Price:€ %@",menu.price];
-//        myAnnotation.objectID = menu.restaurant.objectId;
-//        [self.mapView addAnnotation:myAnnotation];
-//
-
-
-// }
 
 
 @end
