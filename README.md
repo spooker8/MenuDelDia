@@ -1,7 +1,7 @@
 <p># MenuDelDia</p>
 <p>Menu Del Dia is an App developed specifically for Barcelona. It shows the Daily menu from all the cafes nearby based on your current location.</p>
 <p>Menu Del Dia is a prototype IOS App which i developed for Ironhack Hackshow.<br />
-  The prototype was dveloped in 2 weeks with Objective C,IOS8 Xcode6 with Parse.com as the backend.</p>
+  The prototype was developed in 2 weeks with Objective C,IOS8 Xcode6 with Parse.com as the backend.</p>
 <p><a href='http://postimage.org/' target='_blank'><img src='http://s16.postimg.org/sdtvsius5/IMG_7659.jpg' alt="IMG 7659" width="484" height="363" border='0' /></a><br />
   I'm presenting my prototype to an audience. Everyone loved the Idea. It has a strong working formula. Just got to be in Barcelona to continue working on it.
 </p>
